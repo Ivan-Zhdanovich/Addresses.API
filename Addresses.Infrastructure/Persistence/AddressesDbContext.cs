@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Addresses.Infrastructure.Persistence
 {
-    internal class AddressesDbContext(DbContextOptions<AddressesDbContext> options) 
-        : IdentityDbContext<User>(options)
+    public class AddressesDbContext(DbContextOptions<AddressesDbContext> options) 
+        : DbContext(options)
+    
     {
-        internal DbSet<Address> Addresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

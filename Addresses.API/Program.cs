@@ -1,3 +1,4 @@
+using Addresses.Domain.Entities;
 using Addresses.Infrastructure.Extensions;
 using Addresses.Infrastructure.Seeders;
 

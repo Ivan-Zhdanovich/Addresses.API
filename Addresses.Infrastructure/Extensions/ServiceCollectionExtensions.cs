@@ -13,11 +13,9 @@ namespace Addresses.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("WorkDb");
+            var connectionString = configuration.GetConnectionString("AddressesDb");
             services.AddDbContext<AddressesDbContext>(options => options.UseNpgsql(connectionString)
-                .EnableSensitiveDataLogging());
-
-
+            .EnableSensitiveDataLogging());
             services.AddScoped<IAddressSeeder, AddressSeeder>();
         }
     }
