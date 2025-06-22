@@ -1,4 +1,5 @@
 ﻿using Addresses.Domain.Entities;
+using Addresses.Infrastructure.DTOs;
 using Addresses.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,25 @@ namespace Addresses.API.Controllers
             await _addressesDbContext.SaveChangesAsync();
             return Ok();
 
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Address>> UpdateAddressProperties(int id, AddressUpdateDto addressUpdate)
+        {
+
+            var address = await _addressesDbContext.Addresses.FindAsync(id);
+            if (address is null)
+            {
+                return NotFound();
+            }
+
+            address.Region = addressUpdate.Region ?? address.Region;
+            address.City = addressUpdate.City ?? address.City;
+            address.Street = addressUpdate.Street ?? address.Street;
+            address.House = addressUpdate.House ?? address.House;
+            address.Room = addressUpdate.Room ?? address.Room;
+            await _addressesDbContext.SaveChangesAsync();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
