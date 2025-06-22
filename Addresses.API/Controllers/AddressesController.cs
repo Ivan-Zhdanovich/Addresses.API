@@ -1,12 +1,14 @@
 ﻿using Addresses.Domain.Entities;
 using Addresses.Infrastructure.DTOs;
 using Addresses.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Addresses.API.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowSpecificOrigin")]
     [ApiController]
     public class AddressesController(AddressesDbContext addressesDbContext) : ControllerBase
     {
